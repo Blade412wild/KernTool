@@ -8,7 +8,8 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private float zoomSpeed = 4;
-    private Vector3 moveDir = new Vector3();
+    [SerializeField] private float yBeginPosition = 10;
+    private Vector3 moveDir;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +26,10 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveToStartPos()
     {
-        float gridXpos = gridGenerator.height / 2;
-        float gridYpos = gridGenerator.width / 2;
+        float gridYpos = gridGenerator.height / 2;
+        float gridXpos = gridGenerator.width / 2;
 
-        transform.position = new Vector3(gridXpos, 10, gridYpos);
+        moveDir = new Vector3(gridXpos, yBeginPosition, gridYpos);
     }
 
     private Vector3 CalculateMovePosition()
@@ -43,7 +44,7 @@ public class CameraMovement : MonoBehaviour
     private void GetZoom()
     {
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
-        moveDir.y += scrollValue * zoomSpeed * -1;
+        moveDir.y += (scrollValue * zoomSpeed) * Time.deltaTime * -1;
 
     }
 
@@ -51,12 +52,12 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            moveDir.x += -1 * moveSpeed;
+            moveDir.x += -1 * moveSpeed * Time.deltaTime;
             return moveDir.x;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveDir.x += 1 * moveSpeed;
+            moveDir.x += 1 * moveSpeed * Time.deltaTime;
             return moveDir.x;
         }
         else
@@ -70,12 +71,12 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            moveDir.z += 1 * moveSpeed;
+            moveDir.z += 1 * moveSpeed * Time.deltaTime;
             return moveDir.z;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            moveDir.z += -1 * moveSpeed;
+            moveDir.z += -1 * moveSpeed * Time.deltaTime;
             return moveDir.z;
         }
         else

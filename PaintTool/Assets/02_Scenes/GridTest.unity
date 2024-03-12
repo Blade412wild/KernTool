@@ -246,9 +246,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ea1beb537aa2b48b4d61ff0587da04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 200
-  height: 100
+  width: 150
+  height: 75
   layer: 1
+  pixelPrefab: {fileID: 5599505208516574171, guid: 6891506b715990945bf9ad906bcb293f, type: 3}
 --- !u!4 &1507620526
 Transform:
   m_ObjectHideFlags: 0
@@ -370,8 +371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridGenerator: {fileID: 1507620525}
-  moveSpeed: 2
-  zoomSpeed: 4
+  moveSpeed: 20
+  zoomSpeed: 60
+  yBeginPosition: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] public int height = 3;
     [SerializeField] public int layer = 3;
 
+    [SerializeField] private GameObject pixelPrefab;
+
 
 
     // Declare the 2D array
@@ -42,9 +44,8 @@ public class GridGenerator : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 Debug.Log("myArray[" + i + "," + j + "] = " + myArray[i, j]);
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                GameObject cube = Instantiate(pixelPrefab);
                 cube.transform.position = new Vector3(i, layer, j);
-
             }
         }
     }
