@@ -6,11 +6,21 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     //[SerializeField] private GridGenerator gridGenerator;
-    [SerializeField] private float moveSpeed = 4;
+
+    [Header("Movement")]
+    [SerializeField] private float minMoveSpeed = 40;
+    [SerializeField] private float maxMoveSpeed = 4;
+    private float moveSpeed = 4;
+    private float movementCoeffient = 1;
+
+    [Header("Zoom")]
+    [SerializeField] private float minZoomValue = 5;
+    [SerializeField] private float maxZoomValue = 80;
+    private float zoomValue = 70;
+
     [SerializeField] private float zoomSpeed = 1000;
     [SerializeField] private Vector3 beginPosition;
 
-    private float zoomValue = 100;
     private Vector3 moveDir;
 
     // Start is called before the first frame update
@@ -48,17 +58,17 @@ public class CameraMovement : MonoBehaviour
     {
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
         zoomValue += (scrollValue * zoomSpeed) * Time.deltaTime * -1;
-        Debug.Log(zoomValue);
+        //Debug.Log(zoomValue);
         Camera.main.orthographicSize = zoomValue;
 
-        if(zoomValue >= 100)
+        if(zoomValue >= maxZoomValue)
         {
-            zoomValue = 100;
+            zoomValue = maxZoomValue;
         }
 
-        if(zoomValue <= 5)
+        if(zoomValue <= minMoveSpeed)
         {
-            zoomValue = 5;
+            zoomValue = minMoveSpeed;
         }
 
     }
@@ -103,7 +113,11 @@ public class CameraMovement : MonoBehaviour
 
     private void CalculateMoveSpeed()
     {
-        //moveSpeed = 
+        movementCoeffient = zoomValue / maxZoomValue;
+        moveSpeed = movementCoeffient * maxMoveSpeed;
+        //Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
+        //Debug.Log("coeffient = " + movementCoeffient);
+        //Debug.Log("current movement = " + moveSpeed );
     }
 
 }

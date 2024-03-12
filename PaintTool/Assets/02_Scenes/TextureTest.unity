@@ -488,6 +488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  maxMoveSpeed: 4
+  minMoveSpeed: 40
   zoomSpeed: 1000
   beginPosition: {x: 0, y: 0, z: -1}
 --- !u!114 &1670685875
