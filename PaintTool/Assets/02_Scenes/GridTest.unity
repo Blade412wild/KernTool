@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ea1beb537aa2b48b4d61ff0587da04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 100
   width: 200
+  height: 100
   layer: 1
 --- !u!4 &1507620526
 Transform:

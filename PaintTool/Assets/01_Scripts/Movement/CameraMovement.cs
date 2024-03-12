@@ -25,8 +25,8 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveToStartPos()
     {
-        float gridXpos = gridGenerator.width / 2;
-        float gridYpos = gridGenerator.height / 2;
+        float gridXpos = gridGenerator.height / 2;
+        float gridYpos = gridGenerator.width / 2;
 
         transform.position = new Vector3(gridXpos, 10, gridYpos);
     }
@@ -43,7 +43,6 @@ public class CameraMovement : MonoBehaviour
     private void GetZoom()
     {
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
-        Debug.Log(scrollValue);
         moveDir.y += scrollValue * zoomSpeed * -1;
 
     }
@@ -52,12 +51,12 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            moveDir.x += 1 * moveSpeed;
+            moveDir.x += -1 * moveSpeed;
             return moveDir.x;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            moveDir.x += -1 * moveSpeed;
+            moveDir.x += 1 * moveSpeed;
             return moveDir.x;
         }
         else
