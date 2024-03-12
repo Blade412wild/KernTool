@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    [SerializeField] private GridGenerator gridGenerator;
+    //[SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private float moveSpeed = 2;
     [SerializeField] private float zoomSpeed = 4;
-    [SerializeField] private float yBeginPosition = 10;
+    [SerializeField] private Vector3 beginPosition;
     private Vector3 moveDir;
 
     // Start is called before the first frame update
@@ -26,10 +26,10 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveToStartPos()
     {
-        float gridYpos = gridGenerator.height / 2;
-        float gridXpos = gridGenerator.width / 2;
+        //float gridYpos = gridGenerator.height / 2;
+       // float gridXpos = gridGenerator.width / 2;
 
-        moveDir = new Vector3(gridXpos, yBeginPosition, gridYpos);
+        moveDir = beginPosition;
     }
 
     private Vector3 CalculateMovePosition()
@@ -71,13 +71,13 @@ public class CameraMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            moveDir.z += 1 * moveSpeed * Time.deltaTime;
-            return moveDir.z;
+            moveDir.y += 1 * moveSpeed * Time.deltaTime;
+            return moveDir.y;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            moveDir.z += -1 * moveSpeed * Time.deltaTime;
-            return moveDir.z;
+            moveDir.y += -1 * moveSpeed * Time.deltaTime;
+            return moveDir.y;
         }
         else
         {

@@ -5,20 +5,14 @@ using UnityEngine;
 
 public class DrawingTool : MonoBehaviour
 {
-    public Material material;
-    private MaterialPropertyBlock block;
-    private Camera camera;
 
     private void Start()
     {
-        camera = Camera.main;
-        block = new MaterialPropertyBlock();
-
     }
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButton(0))
         {
             CheckIfMouseClickIsEnemy();
         }
@@ -27,19 +21,21 @@ public class DrawingTool : MonoBehaviour
     {
         Debug.Log("clicked");
         Vector3 mousePos = Input.mousePosition;
-        Ray ray = camera.ScreenPointToRay(mousePos);
+        Vector3 texturePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        Debug.Log("Tmouse pos : [" + texturePos.x + ", " + texturePos.y + "] ");
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
-            Pixel pixel = hitInfo.collider.gameObject.GetComponent<Pixel>();
-            if (pixel != null)
+            CanvasTexture exmapleClass = hitInfo.collider.gameObject.GetComponent<CanvasTexture>();
+            if (exmapleClass != null)
             {
-                Debug.Log(pixel.transform.position);
+                exmapleClass.texture.SetPixel((int)texturePos.x, (int)texturePos.y, Color.red);
+                //exmapleClass.texture.SetPixel(10,10, Color.blue);
+                exmapleClass.texture.Apply();
+                Debug.Log(exmapleClass.transform.position);
             }
-        }
-        else
-        {
-            Debug.Log("didnt hit");
         }
     }
 }
