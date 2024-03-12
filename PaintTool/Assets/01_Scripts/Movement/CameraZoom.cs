@@ -13,6 +13,7 @@ public class CameraZoom : MonoBehaviour
     private float smoothTime = 0.25f;
 
     private float scrollValue;
+    private float zoomValue = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +23,9 @@ public class CameraZoom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scrollValue = Input.GetAxis("Mouse ScrollWheel");
-        //PlayerCam.fieldOfView = CalculationZoom2();
-        PlayerCam.fieldOfView = Mathf.SmoothDamp(PlayerCam.fieldOfView, CalculationZoom2(), ref velocity, smoothTime);
+        //scrollValue = Input.GetAxis("Mouse ScrollWheel");
+        PlayerCam.orthographicSize = GetZoom();
+        //PlayerCam.orthographicSize = Mathf.SmoothDamp(PlayerCam.fieldOfView, GetZoom(), ref velocity, smoothTime);
 
     }
     private float CalculationZoom2()
@@ -41,5 +42,14 @@ public class CameraZoom : MonoBehaviour
         //Debug.Log("potValue : " + potValue + "richtingscoefficient : " + richtingscoefficient + " FOVchange : " + FOVchange + " currentFOV : " + currentFOV);
         return currentFOV;
     }
+    private float GetZoom()
+    {
+        float scrollValue = Input.GetAxis("Mouse ScrollWheel");
+        zoomValue += (scrollValue * 1000) * Time.deltaTime * -1;
+        Debug.Log(zoomValue);
+        return zoomValue;
+
+    }
+
 
 }

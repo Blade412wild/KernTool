@@ -6,9 +6,11 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     //[SerializeField] private GridGenerator gridGenerator;
-    [SerializeField] private float moveSpeed = 2;
-    [SerializeField] private float zoomSpeed = 4;
+    [SerializeField] private float moveSpeed = 4;
+    [SerializeField] private float zoomSpeed = 1000;
     [SerializeField] private Vector3 beginPosition;
+
+    private float zoomValue = 100;
     private Vector3 moveDir;
 
     // Start is called before the first frame update
@@ -22,6 +24,8 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         transform.position = CalculateMovePosition();
+        CalculateZoom();
+        CalculateMoveSpeed();
     }
 
     private void MoveToStartPos()
@@ -34,17 +38,28 @@ public class CameraMovement : MonoBehaviour
 
     private Vector3 CalculateMovePosition()
     {
-        GetZoom();
         GetXInput();
         GetYInput();
 
         return new Vector3(moveDir.x, moveDir.y, moveDir.z);
     }
 
-    private void GetZoom()
+    private void CalculateZoom()
     {
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
-        moveDir.y += (scrollValue * zoomSpeed) * Time.deltaTime * -1;
+        zoomValue += (scrollValue * zoomSpeed) * Time.deltaTime * -1;
+        Debug.Log(zoomValue);
+        Camera.main.orthographicSize = zoomValue;
+
+        if(zoomValue >= 100)
+        {
+            zoomValue = 100;
+        }
+
+        if(zoomValue <= 5)
+        {
+            zoomValue = 5;
+        }
 
     }
 
@@ -84,6 +99,11 @@ public class CameraMovement : MonoBehaviour
             return 0;
         }
 
+    }
+
+    private void CalculateMoveSpeed()
+    {
+        //moveSpeed = 
     }
 
 }
