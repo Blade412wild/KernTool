@@ -487,11 +487,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9629c7c21a43854a9a7c900e86787d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  maxMoveSpeed: 4
-  minMoveSpeed: 40
+  minMoveSpeed: 4
+  maxMoveSpeed: 40
+  minZoomValue: 5
+  maxZoomValue: 80
   zoomSpeed: 1000
-  beginPosition: {x: 0, y: 0, z: -1}
+  beginPosition: {x: 51, y: 63, z: -127}
 --- !u!114 &1670685875
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -66,7 +63,7 @@ public class CameraMovement : MonoBehaviour
             zoomValue = maxZoomValue;
         }
 
-        if(zoomValue <= minMoveSpeed)
+        if(zoomValue <= minZoomValue)
         {
             zoomValue = minMoveSpeed;
         }
@@ -115,9 +112,9 @@ public class CameraMovement : MonoBehaviour
     {
         movementCoeffient = zoomValue / maxZoomValue;
         moveSpeed = movementCoeffient * maxMoveSpeed;
-        //Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
-        //Debug.Log("coeffient = " + movementCoeffient);
-        //Debug.Log("current movement = " + moveSpeed );
+        Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
+        Debug.Log("coeffient = " + movementCoeffient);
+        Debug.Log("current movement = " + moveSpeed );
     }
 
 }
