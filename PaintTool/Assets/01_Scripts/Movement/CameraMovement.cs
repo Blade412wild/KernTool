@@ -112,9 +112,9 @@ public class CameraMovement : MonoBehaviour
     {
         movementCoeffient = zoomValue / maxZoomValue;
         moveSpeed = movementCoeffient * maxMoveSpeed;
-        Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
-        Debug.Log("coeffient = " + movementCoeffient);
-        Debug.Log("current movement = " + moveSpeed );
+        //Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
+        //Debug.Log("coeffient = " + movementCoeffient);
+        //Debug.Log("current movement = " + moveSpeed );
     }
 
 }

@@ -5,38 +5,54 @@ using UnityEngine;
 
 public class DrawingTool : MonoBehaviour
 {
+    public static System.Action<Color> OnColorChange;
+    private Color brushColor = Color.black;
 
     private void Start()
     {
+        OnColorChange += changeColor;
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-            CheckIfMouseClickIsEnemy();
+            draw();
         }
+
+
+
     }
-    public void CheckIfMouseClickIsEnemy()
+
+    private void OnDisable()
     {
-        Debug.Log("clicked");
+        OnColorChange -= changeColor;
+
+    }
+    public void draw()
+    {
         Vector3 mousePos = Input.mousePosition;
         Vector3 texturePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        Debug.Log("Tmouse pos : [" + texturePos.x + ", " + texturePos.y + "] ");
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
-            CanvasTexture exmapleClass = hitInfo.collider.gameObject.GetComponent<CanvasTexture>();
-            if (exmapleClass != null)
+            CanvasTexture texutre = hitInfo.collider.gameObject.GetComponent<CanvasTexture>();
+            if (texutre != null)
             {
-                exmapleClass.texture.SetPixel((int)texturePos.x, (int)texturePos.y, Color.red);
-                //exmapleClass.texture.SetPixel(10,10, Color.blue);
-                exmapleClass.texture.Apply();
-                Debug.Log(exmapleClass.transform.position);
+                texutre.texture.SetPixel((int)texturePos.x, (int)texturePos.y, brushColor);
+                texutre.texture.Apply();
+                Debug.Log(texutre.transform.position);
             }
         }
     }
+
+    private void changeColor(Color _color)
+    {
+        brushColor = _color;
+    }
+
+
 }
 
