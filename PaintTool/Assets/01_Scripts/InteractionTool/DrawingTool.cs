@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DrawingTool : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class DrawingTool : MonoBehaviour
     private Vector3 currentMousWorldPos;
 
     private int pathCount;
+    private bool releasedBrush = true;
+
+    private int yPathCount;
+    private int xPathCount;
 
 
     private void Start()
@@ -27,6 +32,12 @@ public class DrawingTool : MonoBehaviour
             //draw();
             CalculateBrush();
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            ResetTool();
+        }
+
 
 
 
@@ -65,7 +76,7 @@ public class DrawingTool : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         currentMousWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (previousMousWorldPos == null)
+        if (releasedBrush == true)
         {
             previousMousWorldPos = currentMousWorldPos;
         }
@@ -76,6 +87,7 @@ public class DrawingTool : MonoBehaviour
         }
 
         previousMousWorldPos = currentMousWorldPos;
+        releasedBrush = false;
     }
 
     private void DicidePath()
@@ -91,7 +103,7 @@ public class DrawingTool : MonoBehaviour
             yPathCount = yPathCount * -1;
         }
 
-        if(xPathCount < 0)
+        if (xPathCount < 0)
         {
             xPathCount = xPathCount * -1;
         }
@@ -128,25 +140,35 @@ public class DrawingTool : MonoBehaviour
         // draws xAxis first 
         for (int i = 0; i < _xPathCount; i++)
         {
-            Debug.Log("xpath : " + _xPathCount);
+            //Debug.Log("xpath : " + _xPathCount);
             previousMousWorldPos.x = previousMousWorldPos.x + _xDirection;
-            drawPixel(previousMousWorldPos);
+            DrawPixel(previousMousWorldPos);
         }
 
         // draws yAxis After
         for (int j = 0; j < _yPathCount; j++)
         {
-            Debug.Log("ypath : " + _yPathCount);
+            //Debug.Log("ypath : " + _yPathCount);
             previousMousWorldPos.y = previousMousWorldPos.y + _yDirection;
-            drawPixel(previousMousWorldPos);
+            DrawPixel(previousMousWorldPos);
         }
+
+        texutre.texture.Apply();
     }
 
-    private void drawPixel(Vector3 _pixelPos)
+    private void DrawPixel(Vector3 _pixelPos)
     {
-        texutre.texture.SetPixel((int)_pixelPos.x, (int)_pixelPos.y, brushColor); 
-        texutre.texture.Apply();
-        Debug.Log(texutre.transform.position);
+        texutre.texture.SetPixel((int)_pixelPos.x, (int)_pixelPos.y, brushColor);
+        //texutre.texture.Apply();
+        //Debug.Log(texutre.transform.position);
+    }
+
+    private void ResetTool()
+    {
+        releasedBrush = true;
+        xPathCount = 0;
+        yPathCount = 0;
+        Debug.Log("released brush : " + releasedBrush);
     }
 
 
