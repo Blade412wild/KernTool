@@ -6,6 +6,11 @@ public class CanvasTexture : MonoBehaviour
     public Texture2D texture;
     void Start()
     {
+        NewTexture();
+    }
+
+    public void NewTexture()
+    {
         texture = new Texture2D(128, 128)
         {
             filterMode = FilterMode.Point
@@ -22,10 +27,7 @@ public class CanvasTexture : MonoBehaviour
                 texture.SetPixel(x, y, color);
             }
         }
-        texture.SetPixel(0,0, Color.red);
         texture.Apply();
 
-
-        
     }
 }
