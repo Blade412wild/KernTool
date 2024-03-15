@@ -2,6 +2,7 @@ using SFB;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -12,9 +13,21 @@ public class Saving : MonoBehaviour
     [SerializeField] private int age;
     [SerializeField] private float height;
 
+    [SerializeField] private Texture2D tex;
+    [SerializeField] private CanvasTexture canvasTexture;
+    private byte[] encodedPNG;
+
     private data dataTest;
 
     private string fullPath;
+
+    public struct data
+    {
+        public string _name;
+        public int _age;
+        public float _height;
+        public byte[] _encodedPNG;
+    }
 
     private void Start()
     {
@@ -24,14 +37,8 @@ public class Saving : MonoBehaviour
             _age = age,
             _height = height
 
-        };
-    }
 
-    public struct data
-    {
-        public string _name;
-        public int _age;
-        public float _height;
+        };
     }
 
     public void OnLoadButton()
@@ -67,8 +74,19 @@ public class Saving : MonoBehaviour
         name = dataSetting._name;
         age = dataSetting._age;
         height = dataSetting._height;
+        ImageConversion.LoadImage(tex, dataSetting._encodedPNG);
+        encodedPNG = dataSetting._encodedPNG;
         Debug.Log("Saved File To : " + _filePath);
+    }
 
+    public void EncodeTexToPNG()
+    {
+        tex = canvasTexture.texture;
+        Debug.Log(tex.name);
+        // Encode texture into PNG
+        byte[] bytes = ImageConversion.EncodeToPNG(tex);
+        dataTest._encodedPNG = bytes;
+        Debug.Log("encoded To PNG");
     }
 
 }

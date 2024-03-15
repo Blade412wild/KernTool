@@ -10,6 +10,7 @@ public class CanvasTexture : MonoBehaviour
         {
             filterMode = FilterMode.Point
         };
+        texture.name = "textureTest";
 
         GetComponent<Renderer>().material.mainTexture = texture;
 
