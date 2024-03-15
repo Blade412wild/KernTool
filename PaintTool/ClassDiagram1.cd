@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CanvasTexture" Collapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\CanvasTexture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GetPixel" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAIAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\GetPixel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ToolColor" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAAACAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\01_Scripts\InteractionTool\Color\ToolColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawingTool" Collapsed="true">
+    <Position X="7.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQBIAAIACAAAAAAAAIAEAAAASgAAAAIAAEACQAACAQ=</HashCode>
+      <FileName>Assets\01_Scripts\InteractionTool\DrawingTool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GraphicRaycasterRaycasterExample" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACCAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\InteractionTool\GraphicRaycasterRaycasterExample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraMovement" Collapsed="true">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQACAAAECAABAAAAACEAAgAYAAAAAAAJAAgEAIACAg=</HashCode>
+      <FileName>Assets\01_Scripts\Movement\CameraMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pixel" Collapsed="true">
+    <Position X="9.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\Pixel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EditorUtilitySaveFilePanel" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\Saving&amp;Loading\EditorUtilitySaveFilePanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Saving" Collapsed="true">
+    <Position X="8.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAGAAQAQACYgAAIAAAAIEAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\01_Scripts\Saving&amp;Loading\Saving.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIControllerEmpty" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEABkQAAACAAAAAIAKACAgCAAAAIAAAAAAAAEIAACAA=</HashCode>
+      <FileName>Assets\UIControllerEmpty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
