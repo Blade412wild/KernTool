@@ -85,6 +85,12 @@ public class DrawingTool : MonoBehaviour
         {
             DicidePath();
         }
+        else
+        {
+            DrawPixel(currentMousWorldPos);
+        }
+
+
 
         previousMousWorldPos = currentMousWorldPos;
         releasedBrush = false;
