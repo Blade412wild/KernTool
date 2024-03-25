@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class DrawingTool : MonoBehaviour
 {
     public static System.Action<Color> OnColorChange;
-    [SerializeField] private CanvasTexture texutre;
+    public static System.Action<CanvasTexture> OnInputRelease;
+    public static System.Action OnInput;
+
+    [SerializeField] private CanvasTexture texture;
     private Color brushColor = Color.black;
 
     private Vector3 previousMousWorldPos;
@@ -29,6 +28,7 @@ public class DrawingTool : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            OnInput?.Invoke();
             //draw();
             CalculateBrush();
         }
@@ -36,6 +36,7 @@ public class DrawingTool : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             ResetTool();
+            OnInputRelease?.Invoke(texture);
         }
 
 
@@ -57,11 +58,11 @@ public class DrawingTool : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
-            if (texutre != null)
+            if (texture != null)
             {
-                texutre.texture.SetPixel((int)texturePos.x, (int)texturePos.y, brushColor); // dit moet ik nog refactoren 
-                texutre.texture.Apply();
-                Debug.Log(texutre.transform.position);
+                texture.texture.SetPixel((int)texturePos.x, (int)texturePos.y, brushColor); // dit moet ik nog refactoren 
+                texture.texture.Apply();
+                Debug.Log(texture.transform.position);
             }
         }
     }
@@ -159,12 +160,12 @@ public class DrawingTool : MonoBehaviour
             DrawPixel(previousMousWorldPos);
         }
 
-        texutre.texture.Apply();
+        texture.texture.Apply();
     }
 
     private void DrawPixel(Vector3 _pixelPos)
     {
-        texutre.texture.SetPixel((int)_pixelPos.x, (int)_pixelPos.y, brushColor);
+        texture.texture.SetPixel((int)_pixelPos.x, (int)_pixelPos.y, brushColor);
         //texutre.texture.Apply();
         //Debug.Log(texutre.transform.position);
     }
