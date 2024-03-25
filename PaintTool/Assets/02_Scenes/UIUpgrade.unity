@@ -3297,6 +3297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvas: {fileID: 1043730263}
+  miniCanvas: {fileID: 138547914}
 --- !u!1 &2027925296
 GameObject:
   m_ObjectHideFlags: 0
