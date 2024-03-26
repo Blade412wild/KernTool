@@ -1,10 +1,11 @@
 using SFB;
+using System;
 using System.IO;
 using UnityEngine;
 
 public class Saving : MonoBehaviour
 {
-
+    public static Action OnSaving;
     [SerializeField] private string name;
     [SerializeField] private int age;
     [SerializeField] private float height;
@@ -27,6 +28,11 @@ public class Saving : MonoBehaviour
 
     private void Start()
     {
+        SaveCheck.OnExportButtonClicked += OnExportButton;
+        SaveCheck.OnLoadButtonClicked += OnLoadButton;
+
+
+
         dataTest = new data
         {
             _name = name,
@@ -64,6 +70,7 @@ public class Saving : MonoBehaviour
         writer.Close();
         writer.Dispose();
         Debug.Log("Saved File To : " + _filePath);
+        OnSaving?.Invoke();
     }
 
     private void Load(string _filePath)

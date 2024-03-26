@@ -6,11 +6,14 @@ public class CanvasTexture : MonoBehaviour
     public Texture2D texture;
     void Start()
     {
+        SaveCheck.OnNewProjectButtonClicked+= NewTexture;
+
         NewTexture();
     }
 
     public void NewTexture()
     {
+        Debug.Log(" new project call");
         texture = new Texture2D(128, 128)
         {
             filterMode = FilterMode.Point
@@ -28,6 +31,7 @@ public class CanvasTexture : MonoBehaviour
             }
         }
         texture.Apply();
-
     }
+
+
 }

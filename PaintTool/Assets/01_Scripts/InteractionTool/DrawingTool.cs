@@ -18,23 +18,28 @@ public class DrawingTool : MonoBehaviour
     private int yPathCount;
     private int xPathCount;
 
+    private bool mayDraw = true;
 
     private void Start()
     {
         OnColorChange += changeColor;
+        GraphicRaycasterRaycasterExample.OnUIHover += MayDraw;
     }
 
     private void Update()
     {
+        //Debug.Log(mayDraw);
         if (Input.GetMouseButton(0))
         {
+            if (mayDraw == false) return;
+            //Debug.Log(" ?");
             OnInput?.Invoke();
-            //draw();
             CalculateBrush();
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            if (mayDraw == false) return;
             ResetTool();
             OnInputRelease?.Invoke(texture);
         }
@@ -53,6 +58,7 @@ public class DrawingTool : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         Vector3 texturePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(texturePos);
 
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
@@ -177,6 +183,13 @@ public class DrawingTool : MonoBehaviour
         yPathCount = 0;
         Debug.Log("released brush : " + releasedBrush);
     }
+
+
+    private void MayDraw(bool _result)
+    {
+        mayDraw = _result;
+    }
+
 
 
 }

@@ -20,6 +20,9 @@ public class Undo_Redo : MonoBehaviour
     private Texture2D emptyTexture;
     private byte[] encodedEmptyTexture;
 
+    private bool mayDraw = true;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,11 +36,10 @@ public class Undo_Redo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("firstUndo : " + firstUndo);
+        //Debug.Log("firstRedo : " + firstRedo);
 
-        Debug.Log("firstUndo : " + firstUndo);
-        Debug.Log("firstRedo : " + firstRedo);
-
-        Debug.Log("UndoStack : " + undoStack.Count + " | " + "RedoStack : " + redoStack.Count);
+        //Debug.Log("UndoStack : " + undoStack.Count + " | " + "RedoStack : " + redoStack.Count);
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -192,5 +194,8 @@ public class Undo_Redo : MonoBehaviour
         redoStack.Clear();
     }
 
-
+    private void MayDraw(bool _result)
+    {
+        mayDraw = _result;
+    }
 }
