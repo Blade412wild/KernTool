@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Undo_Redo : MonoBehaviour
 {
-    [SerializeField] private CanvasTexture mainCanvas;
-    [SerializeField] private CanvasTexture miniCanvas;
+    [SerializeField] private DrawingCanvas mainCanvas;
+    [SerializeField] private DrawingCanvas miniCanvas;
 
 
     [SerializeField] private Stack<byte[]> redoStack = new Stack<byte[]>();
@@ -154,7 +154,7 @@ public class Undo_Redo : MonoBehaviour
         }
     }
 
-    private void AddToUndo(CanvasTexture _canvasTexture)
+    private void AddToUndo(DrawingCanvas _canvasTexture)
     {
         byte[] quicksave = EncodeTexToPNG();
 
@@ -179,7 +179,7 @@ public class Undo_Redo : MonoBehaviour
         return bytes;
     }
 
-    private void Load(CanvasTexture canvas, byte[] _encodedPNG)
+    private void Load(DrawingCanvas canvas, byte[] _encodedPNG)
     {
         ImageConversion.LoadImage(canvas.texture, _encodedPNG);
     }

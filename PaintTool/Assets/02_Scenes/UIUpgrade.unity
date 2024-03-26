@@ -2114,9 +2114,6 @@ MonoBehaviour:
   newProjectUIPopUp: {fileID: 360707628}
   exportUIPopUp: {fileID: 770573574}
   loadUIPopUp: {fileID: 1146036765}
-  currentPopUp: {fileID: 0}
-  saveButton: {fileID: 0}
-  cancelButton: {fileID: 0}
 --- !u!4 &996290907
 Transform:
   m_ObjectHideFlags: 0
@@ -4532,7 +4529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1555510162
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5139,7 +5136,6 @@ GameObject:
   - component: {fileID: 1670685872}
   - component: {fileID: 1670685871}
   - component: {fileID: 1670685874}
-  - component: {fileID: 1670685875}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5239,21 +5235,6 @@ MonoBehaviour:
   maxZoomValue: 80
   zoomSpeed: 1000
   beginPosition: {x: 51, y: 63, z: -127}
---- !u!114 &1670685875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670685870}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6850b725796ecbf4c8ecc2ce4a690f0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerCam: {fileID: 1670685872}
-  minFOV: 15
-  maxFOV: 60
 --- !u!1 &1680646162
 GameObject:
   m_ObjectHideFlags: 0

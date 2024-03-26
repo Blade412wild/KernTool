@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
 
-public class GraphicRaycasterRaycasterExample : MonoBehaviour
+public class UIDetector : MonoBehaviour
 {
     public static event Action<bool> OnUIHover;
 

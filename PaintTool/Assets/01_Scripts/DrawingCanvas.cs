@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CanvasTexture : MonoBehaviour
+public class DrawingCanvas : MonoBehaviour
 {
     public Texture2D texture;
     void Start()
@@ -13,7 +13,6 @@ public class CanvasTexture : MonoBehaviour
 
     public void NewTexture()
     {
-        Debug.Log(" new project call");
         texture = new Texture2D(128, 128)
         {
             filterMode = FilterMode.Point

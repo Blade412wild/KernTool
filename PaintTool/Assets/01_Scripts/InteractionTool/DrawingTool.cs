@@ -3,10 +3,10 @@ using UnityEngine;
 public class DrawingTool : MonoBehaviour
 {
     public static System.Action<Color> OnColorChange;
-    public static System.Action<CanvasTexture> OnInputRelease;
+    public static System.Action<DrawingCanvas> OnInputRelease;
     public static System.Action OnInput;
 
-    [SerializeField] private CanvasTexture texture;
+    [SerializeField] private DrawingCanvas texture;
     private Color brushColor = Color.black;
 
     private Vector3 previousMousWorldPos;
@@ -23,16 +23,14 @@ public class DrawingTool : MonoBehaviour
     private void Start()
     {
         OnColorChange += changeColor;
-        GraphicRaycasterRaycasterExample.OnUIHover += MayDraw;
+        UIDetector.OnUIHover += MayDraw;
     }
 
     private void Update()
     {
-        //Debug.Log(mayDraw);
         if (Input.GetMouseButton(0))
         {
             if (mayDraw == false) return;
-            //Debug.Log(" ?");
             OnInput?.Invoke();
             CalculateBrush();
         }
@@ -43,16 +41,11 @@ public class DrawingTool : MonoBehaviour
             ResetTool();
             OnInputRelease?.Invoke(texture);
         }
-
-
-
-
     }
 
     private void OnDisable()
     {
         OnColorChange -= changeColor;
-
     }
     public void draw()
     {
@@ -97,8 +90,6 @@ public class DrawingTool : MonoBehaviour
             DrawPixel(currentMousWorldPos);
         }
 
-
-
         previousMousWorldPos = currentMousWorldPos;
         releasedBrush = false;
     }
@@ -108,8 +99,8 @@ public class DrawingTool : MonoBehaviour
         float xLenght = currentMousWorldPos.x - previousMousWorldPos.x;
         float yLenght = currentMousWorldPos.y - previousMousWorldPos.y;
 
-        int yPathCount = (int)yLenght;
-        int xPathCount = (int)xLenght;
+        yPathCount = (int)yLenght;
+        xPathCount = (int)xLenght;
 
         if (yPathCount < 0)
         {

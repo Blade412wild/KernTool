@@ -23,7 +23,6 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GridGenerator.OngridIsDone += MoveToStartPos;
         MoveToStartPos();
     }
 
@@ -37,9 +36,6 @@ public class CameraMovement : MonoBehaviour
 
     private void MoveToStartPos()
     {
-        //float gridYpos = gridGenerator.height / 2;
-       // float gridXpos = gridGenerator.width / 2;
-
         moveDir = beginPosition;
     }
 
@@ -55,7 +51,6 @@ public class CameraMovement : MonoBehaviour
     {
         float scrollValue = Input.GetAxis("Mouse ScrollWheel");
         zoomValue += (scrollValue * zoomSpeed) * Time.deltaTime * -1;
-        //Debug.Log(zoomValue);
         Camera.main.orthographicSize = zoomValue;
 
         if(zoomValue >= maxZoomValue)
@@ -67,7 +62,6 @@ public class CameraMovement : MonoBehaviour
         {
             zoomValue = minMoveSpeed;
         }
-
     }
 
     private float GetXInput()
@@ -112,9 +106,6 @@ public class CameraMovement : MonoBehaviour
     {
         movementCoeffient = zoomValue / maxZoomValue;
         moveSpeed = movementCoeffient * maxMoveSpeed;
-        //Debug.Log("maxzoom = " + maxZoomValue + " | zoomValue : " + zoomValue);
-        //Debug.Log("coeffient = " + movementCoeffient);
-        //Debug.Log("current movement = " + moveSpeed );
     }
 
 }

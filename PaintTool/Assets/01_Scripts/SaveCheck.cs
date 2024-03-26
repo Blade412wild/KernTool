@@ -12,19 +12,12 @@ public class SaveCheck : MonoBehaviour
     public static Action OnLoadButtonClicked;
     public static Action OnExportButtonClicked;
 
-
-
     [SerializeField] private TMP_Text SaveButtonText;
     [SerializeField] private GameObject UIPopUpPanel;
     [SerializeField] private GameObject newProjectUIPopUp;
     [SerializeField] private GameObject exportUIPopUp;
     [SerializeField] private GameObject loadUIPopUp;
-    [SerializeField] private GameObject currentPopUp;
-
-
-    [Header("UI Buttons")]
-    [SerializeField] private Button saveButton;
-    [SerializeField] private Button cancelButton;
+    private GameObject currentPopUp;
 
 
     bool FileIsSaved = false;
@@ -52,7 +45,6 @@ public class SaveCheck : MonoBehaviour
 
     public void SetFileIsSavedFalse()
     {
-        Debug.Log("there is input");
         FileIsSaved = false;
         SaveButtonText.text = "Save*";
     }
@@ -99,7 +91,6 @@ public class SaveCheck : MonoBehaviour
         }
         else
         {
-            Debug.Log(" export");
             UIPopUpPanel.SetActive(true);
             currentPopUp.SetActive(true);
         }
@@ -113,21 +104,14 @@ public class SaveCheck : MonoBehaviour
 
     public void NewProjectButtonClicked()
     {
-        Debug.Log("activate new project");
         OnNewProjectButtonClicked?.Invoke();
     }
     public void LoadButtonClicked()
     {
-        Debug.Log("activate  load");
-
         OnLoadButtonClicked?.Invoke();
     }
     public void ExportButtonClicked()
     {
-        Debug.Log("activate export");
-
         OnExportButtonClicked?.Invoke();
     }
-
-
 }

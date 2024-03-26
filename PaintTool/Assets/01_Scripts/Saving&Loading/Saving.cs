@@ -11,7 +11,7 @@ public class Saving : MonoBehaviour
     [SerializeField] private float height;
 
     [SerializeField] private Texture2D tex;
-    [SerializeField] private CanvasTexture canvasTexture;
+    [SerializeField] private DrawingCanvas canvasTexture;
     private byte[] encodedPNG;
 
     private data dataTest;
