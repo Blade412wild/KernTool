@@ -10,40 +10,22 @@ public class Undo_Redo : MonoBehaviour
     [SerializeField] private DrawingCanvas mainCanvas;
     [SerializeField] private DrawingCanvas miniCanvas;
 
-
-    [SerializeField] private Stack<byte[]> redoStack = new Stack<byte[]>();
-    [SerializeField] private Stack<byte[]> undoStack = new Stack<byte[]>();
-
-    private bool firstUndo = true;
-    private bool firstRedo = true;
-
-    private Texture2D emptyTexture;
-    private byte[] encodedEmptyTexture;
-
-    private bool mayDraw = true;
-
+    private Stack<byte[]> redoStack = new Stack<byte[]>();
+    private Stack<byte[]> undoStack = new Stack<byte[]>();
 
     // Start is called before the first frame update
     void Start()
     {
         DrawingTool.OnInputRelease += AddToUndo;
-        DrawingTool.OnInput += SetFirstUndoTrue;
         DrawingTool.OnInput += EmptyRedo;
-        //byte[] encodedEmptyTexture = ImageConversion.EncodeToPNG(emptyTexture);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("firstUndo : " + firstUndo);
-        //Debug.Log("firstRedo : " + firstRedo);
-
-        //Debug.Log("UndoStack : " + undoStack.Count + " | " + "RedoStack : " + redoStack.Count);
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Undo2();
+            Undo();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
@@ -55,90 +37,20 @@ public class Undo_Redo : MonoBehaviour
     private void Redo()
     {
         if (redoStack.Count == 0) return;
-
-        if (undoStack.Count == 0)
-        {
-            byte[] previousTexture = redoStack.Pop();
-            Load(mainCanvas, previousTexture);
-            undoStack.Push(previousTexture);
-            firstUndo = true;
-            firstRedo = false;
-        }
-        else
-        {
-            if (firstRedo == true)
-            {
-                undoStack.Push(redoStack.Pop());
-                firstUndo = true;
-                firstRedo = false;
-            }
-
-            if (undoStack.Count == 0) return;
-            byte[] previousTexture = redoStack.Pop();
-            Load(miniCanvas, previousTexture);
-            Load(mainCanvas, previousTexture);
-            undoStack.Push(previousTexture);
-        }
+        byte[] previousTexture = redoStack.Pop();
+        Load(mainCanvas, previousTexture);
+        undoStack.Push(previousTexture);
     }
-
-
 
     private void Undo()
     {
-        Debug.Log("undo");
         if (undoStack.Count == 0)
         {
             mainCanvas.NewTexture();
         }
         else
         {
-            if (redoStack.Count == 0)
-            {
-                Debug.Log(" einde redo");
-                byte[] previousTexture = undoStack.Pop();
-                Load(miniCanvas, previousTexture);
-                Load(mainCanvas, previousTexture);
-                redoStack.Push(previousTexture);
-                firstUndo = true;
-                firstRedo = false;
-
-            }
-            else
-            {
-                if (firstUndo == true)
-                {
-                    redoStack.Push(undoStack.Pop());
-                    firstUndo = false;
-                    firstRedo = true;
-                }
-
-                byte[] previousTexture = undoStack.Pop();
-                Load(miniCanvas, previousTexture);
-                Load(mainCanvas, previousTexture);
-                redoStack.Push(previousTexture);
-
-            }
-
-
-
-        }
-    }
-
-    private void Undo2()
-    {
-        if (undoStack.Count == 0)
-        {
-            mainCanvas.NewTexture();
-        }
-        else
-        {
-
-            if (firstUndo == true)
-            {
-                redoStack.Push(undoStack.Pop());
-                firstUndo = false;
-                firstRedo = true;
-            }
+            redoStack.Push(undoStack.Pop());
 
             if (undoStack.Count == 0)
             {
@@ -146,10 +58,8 @@ public class Undo_Redo : MonoBehaviour
             }
             else
             {
-                byte[] previousTexture = undoStack.Pop();
-                Load(miniCanvas, previousTexture);
+                byte[] previousTexture = undoStack.Peek();
                 Load(mainCanvas, previousTexture);
-                redoStack.Push(previousTexture);
             }
         }
     }
@@ -157,13 +67,6 @@ public class Undo_Redo : MonoBehaviour
     private void AddToUndo(DrawingCanvas _canvasTexture)
     {
         byte[] quicksave = EncodeTexToPNG();
-
-        if (redoStack.Count > 0 && firstUndo == false)
-        {
-            undoStack.Push(redoStack.Pop());
-            undoStack.Push(redoStack.Pop());
-        }
-
         undoStack.Push(quicksave);
     }
 
@@ -184,18 +87,8 @@ public class Undo_Redo : MonoBehaviour
         ImageConversion.LoadImage(canvas.texture, _encodedPNG);
     }
 
-    private void SetFirstUndoTrue()
-    {
-        firstUndo = true;
-        firstRedo = true;
-    }
     private void EmptyRedo()
     {
         redoStack.Clear();
-    }
-
-    private void MayDraw(bool _result)
-    {
-        mayDraw = _result;
     }
 }

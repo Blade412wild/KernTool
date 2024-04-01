@@ -16,6 +16,7 @@ public class SaveCheck : MonoBehaviour
     [SerializeField] private GameObject UIPopUpPanel;
     [SerializeField] private GameObject newProjectUIPopUp;
     [SerializeField] private GameObject exportUIPopUp;
+    [SerializeField] private GameObject QuitUIPopUp;
     [SerializeField] private GameObject loadUIPopUp;
     private GameObject currentPopUp;
 
@@ -26,11 +27,9 @@ public class SaveCheck : MonoBehaviour
     {
 
         DrawingTool.OnInput += SetFileIsSavedFalse;
-        Saving.OnSaving += HasSaved;
+        Saving.OnActionDone += HasSaved;
         SaveButtonText.text = "Save*";
     }
-
-
     public bool CheckIfSaved()
     {
         if (FileIsSaved == true)
@@ -95,15 +94,30 @@ public class SaveCheck : MonoBehaviour
             currentPopUp.SetActive(true);
         }
     }
+    public void QuitPanel()
+    {
+        currentPopUp = QuitUIPopUp;
+        if (CheckIfSaved() == true)
+        {
+            QuitButtonClicked();
+        }
+        else
+        {
+            UIPopUpPanel.SetActive(true);
+            currentPopUp.SetActive(true);
+        }
+    }
 
     public void CancelButtonClicked()
     {
-        UIPopUpPanel.SetActive(false);
+        if (currentPopUp == null) return;
         currentPopUp.SetActive(false);
+        UIPopUpPanel.SetActive(false);
     }
 
     public void NewProjectButtonClicked()
     {
+
         OnNewProjectButtonClicked?.Invoke();
     }
     public void LoadButtonClicked()
@@ -113,5 +127,10 @@ public class SaveCheck : MonoBehaviour
     public void ExportButtonClicked()
     {
         OnExportButtonClicked?.Invoke();
+    }
+
+    public void QuitButtonClicked()
+    {
+        Application.Quit();
     }
 }

@@ -30,6 +30,7 @@ public class DrawingCanvas : MonoBehaviour
             }
         }
         texture.Apply();
+        Saving.OnActionDone?.Invoke();
     }
 
 

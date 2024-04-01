@@ -51,17 +51,14 @@ public class DrawingTool : MonoBehaviour
     {
         Vector3 mousePos = Input.mousePosition;
         Vector3 texturePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(texturePos);
-
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo))
         {
             if (texture != null)
             {
-                texture.texture.SetPixel((int)texturePos.x, (int)texturePos.y, brushColor); // dit moet ik nog refactoren 
+                texture.texture.SetPixel((int)texturePos.x, (int)texturePos.y, brushColor); 
                 texture.texture.Apply();
-                Debug.Log(texture.transform.position);
             }
         }
     }
@@ -144,7 +141,6 @@ public class DrawingTool : MonoBehaviour
         // draws xAxis first 
         for (int i = 0; i < _xPathCount; i++)
         {
-            //Debug.Log("xpath : " + _xPathCount);
             previousMousWorldPos.x = previousMousWorldPos.x + _xDirection;
             DrawPixel(previousMousWorldPos);
         }
@@ -152,7 +148,6 @@ public class DrawingTool : MonoBehaviour
         // draws yAxis After
         for (int j = 0; j < _yPathCount; j++)
         {
-            //Debug.Log("ypath : " + _yPathCount);
             previousMousWorldPos.y = previousMousWorldPos.y + _yDirection;
             DrawPixel(previousMousWorldPos);
         }
@@ -163,8 +158,6 @@ public class DrawingTool : MonoBehaviour
     private void DrawPixel(Vector3 _pixelPos)
     {
         texture.texture.SetPixel((int)_pixelPos.x, (int)_pixelPos.y, brushColor);
-        //texutre.texture.Apply();
-        //Debug.Log(texutre.transform.position);
     }
 
     private void ResetTool()
@@ -172,7 +165,6 @@ public class DrawingTool : MonoBehaviour
         releasedBrush = true;
         xPathCount = 0;
         yPathCount = 0;
-        Debug.Log("released brush : " + releasedBrush);
     }
 
 
@@ -180,8 +172,5 @@ public class DrawingTool : MonoBehaviour
     {
         mayDraw = _result;
     }
-
-
-
 }
 

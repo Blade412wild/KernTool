@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Saving : MonoBehaviour
 {
-    public static Action OnSaving;
+    public static Action OnActionDone;
     [SerializeField] private string name;
     [SerializeField] private int age;
     [SerializeField] private float height;
@@ -31,23 +31,17 @@ public class Saving : MonoBehaviour
         SaveCheck.OnExportButtonClicked += OnExportButton;
         SaveCheck.OnLoadButtonClicked += OnLoadButton;
 
-
-
         dataTest = new data
         {
             _name = name,
             _age = age,
             _height = height
-
-
         };
-
-        
     }
 
     public void OnLoadButton()
     {
-        Debug.Log("Attempting Loading");
+        //Debug.Log("Attempting Loading");
         string[] options = StandaloneFileBrowser.OpenFilePanel("Open File", Application.persistentDataPath, "txt", false);
         if (options.Length == 0) return;
         string filepath = options[0];
@@ -56,7 +50,7 @@ public class Saving : MonoBehaviour
 
     public void OnSaveButton()
     {
-        Debug.Log("Attempting Saving");
+        //Debug.Log("Attempting Saving");
         string filePath = StandaloneFileBrowser.SaveFilePanel("Save File", Application.persistentDataPath, "Wow_Je_Saved_Een_Keer.txt", "txt");
         if (filePath.Length == 0) return;
         EncodeTexToPNG();
@@ -69,8 +63,8 @@ public class Saving : MonoBehaviour
         writer.WriteLine(JsonUtility.ToJson(dataPackage, true));
         writer.Close();
         writer.Dispose();
-        Debug.Log("Saved File To : " + _filePath);
-        OnSaving?.Invoke();
+        //Debug.Log("Saved File To : " + _filePath);
+        OnActionDone?.Invoke();
     }
 
     private void Load(string _filePath)
@@ -85,22 +79,24 @@ public class Saving : MonoBehaviour
 
         tex = canvasTexture.texture;
         ImageConversion.LoadImage(tex, encodedPNG);
-        Debug.Log("Loaded File from : " + _filePath);
+        //Debug.Log("Loaded File from : " + _filePath);
+        OnActionDone?.Invoke();
+
     }
 
     private void EncodeTexToPNG()
     {
         tex = canvasTexture.texture;
-        Debug.Log("attempting to encode " + tex.name + " to .png");
+        //Debug.Log("attempting to encode " + tex.name + " to .png");
         byte[] bytes = ImageConversion.EncodeToPNG(tex);
         dataTest._encodedPNG = bytes;
         encodedPNG = bytes;
-        Debug.Log("encoded " + tex.name + " to .png");
+        //Debug.Log("encoded " + tex.name + " to .png");
     }
 
     public void OnExportButton()
     {
-        Debug.Log("Attempting toExport");
+        //Debug.Log("Attempting toExport");
         string filePath = StandaloneFileBrowser.SaveFilePanel("Export as PNG", Application.persistentDataPath, "NewPNG", "png");
 
         if (filePath.Length == 0) return;
@@ -110,21 +106,8 @@ public class Saving : MonoBehaviour
 
     private void ExportAsPNG(string _filePath, byte[] dataPackage)
     {
-        //StreamWriter writer = new StreamWriter(_filePath);
         File.WriteAllBytes(_filePath, dataPackage);
-
-
-        //File.WriteAllBytes(Application.persistentDataPath + _filePath, dataPackage);
-        //writer.WriteLine(JsonUtility.ToJson(dataPackage, true));
-        //writer.Close();
-        //writer.Dispose();
-        //Debug.Log("Saved File To : " + _filePath);
-
-        //StreamWriter writer = new StreamWriter(_filePath);
-        //writer.WriteLine(JsonUtility.ToJson(dataPackage, true));
-        //writer.Close();
-        //writer.Dispose();
-        //Debug.Log("Saved File To : " + _filePath);
+        OnActionDone?.Invoke();
     }
 
 }

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    //[SerializeField] private GridGenerator gridGenerator;
-
     [Header("Movement")]
     [SerializeField] private float minMoveSpeed = 40;
     [SerializeField] private float maxMoveSpeed = 4;
@@ -30,8 +28,8 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
         transform.position = CalculateMovePosition();
-        CalculateZoom();
         CalculateMoveSpeed();
+        CalculateZoom();
     }
 
     private void MoveToStartPos()
@@ -80,7 +78,6 @@ public class CameraMovement : MonoBehaviour
         {
             return 0;
         }
-
     }
 
     private float GetYInput()
@@ -99,7 +96,6 @@ public class CameraMovement : MonoBehaviour
         {
             return 0;
         }
-
     }
 
     private void CalculateMoveSpeed()
